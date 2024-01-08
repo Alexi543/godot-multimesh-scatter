@@ -23,20 +23,18 @@ extends MultiMeshInstance3D
 
 enum ScatterType { BOX, SPHERE }
 
-@export_group("Baking Multimesh")
-
 #export the multimesh to another node
 @export var as_multimesh: bool = false:
 	get: return as_multimesh
 	set(_value):
 		var new_multimesh: MultiMeshInstance3D = MultiMeshInstance3D.new()
-		new_multimesh.multimesh = self.multimesh
+		new_multimesh.multimesh = self.multimesh.duplicate()
 		
 		var destination: Node = get_parent()
 		destination.add_child(new_multimesh)
 		
 		new_multimesh.set_owner(destination)
-		new_multimesh.name = "UnNamed_MultiMeshInstance"
+		new_multimesh.name = "MultiMeshInstance"
 
 @export_group("Scattering")
 
